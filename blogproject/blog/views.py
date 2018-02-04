@@ -3,5 +3,5 @@ from django.http import HttpResponse
 from .models import Post
 
 def index(request):
-	post_list = Post.objects.aall().order_by('-created_time')
-	return render(request,'blog/index.html',content={'post_list':post_list})
+	post_list = Post.objects.all().order_by('-created_time')
+	return render(request,'blog/index.html',context={'post_list':post_list})
