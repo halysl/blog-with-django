@@ -13,13 +13,18 @@ class Category(models.Model):
     """
 	name = models.CharField(max_length=100)
 
+	def __str__(self):
+		return self.name
+
 class Tag(models.Model):
 	'''
 	Tag标签表，一个字段
 	'''
 	name = models.CharField(max_length=100)
+	def __str__(self):
+		return self.name
 
-class post(models.Model):
+class Post(models.Model):
 	'''
 	文章表，多个字段
 	'''
@@ -40,7 +45,11 @@ class post(models.Model):
 	#django.contrib.auth是django内置应用，处理网站部分流程
 	#User 是 Django 为我们已经写好的用户模型
 	author = models.ForeignKey(User)
-
-    #
+	#根据分类及标签的属性，分配不同的数据类型
+	#一篇文章对应一个分类，一个分类对应多个标签，一对多，所以用外键连category
+	#一篇文章对应多个标签，一个标签对应多个文章，多对多，所以用ManyToManyField类型，可留空（blank=True）
 	category = models.ForeignKey(Category)
 	tags = models.ManyToManyField(Tag,blank=True)
+
+	def __str__(self):
+		return self.title
