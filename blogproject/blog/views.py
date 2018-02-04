@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Post
 
 def index(request):
-	return render(request,'blog/index.html',context={
-			'title':'我的博客首页',
-			'welcome':'welcome visit my web'
-		})
+	post_list = Post.objects.aall().order_by('-created_time')
+	return render(request,'blog/index.html',content={'post_list':post_list})
