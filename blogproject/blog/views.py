@@ -4,11 +4,14 @@ from django.http import HttpResponse
 from .models import Post, Category
 from comments.forms import CommentForm
 from django.views.generic import ListView, DetailView
+from django.core.paginator import Paginator
 
 class IndexView(ListView):
 	model = Post
 	template_name = 'blog/index.html'
 	context_object_name = 'post_list'
+
+	paginate_by = 2
 
 class CategoryView(IndexView):
 	def get_queryset(self):
@@ -53,3 +56,4 @@ class PostDetailView(DetailView):
             'comment_list': comment_list
         })
 		return context
+
