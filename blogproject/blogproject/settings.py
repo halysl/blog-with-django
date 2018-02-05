@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',#blog应用
+    'comments',#评论系统
 ]
 
 MIDDLEWARE = [
