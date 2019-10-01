@@ -1,11 +1,13 @@
 import re
-from django.shortcuts import render, get_object_or_404
+
+import markdown
 from django.http import HttpResponse
-# Create your views here.
-from .models import Post
+from django.shortcuts import get_object_or_404, render
 from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
-import markdown
+
+# Create your views here.
+from .models import Post
 
 
 def index(request):
