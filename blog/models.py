@@ -35,7 +35,7 @@ class Post(models.Model):
     body = models.TextField("文章内容", )
     excerpt = models.CharField("文章摘要", max_length=200, blank=True)
 
-    created_time = models.DateTimeField("创建时间", )
+    created_time = models.DateTimeField("创建时间", default=timezone.now)
     modified_time = models.DateTimeField("修改时间", )
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -45,6 +45,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.modified_time = timezone.now()
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("blog:detail", kwargs={"pk": self.pk})
