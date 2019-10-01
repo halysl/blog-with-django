@@ -32,6 +32,7 @@ class Post(models.Model):
     class Meta:
         verbose_name = "文章"
         verbose_name_plural = verbose_name
+        ordering = ['-created_time']
 
     title = models.CharField("标题", max_length=70)
     body = models.TextField("文章内容", )
